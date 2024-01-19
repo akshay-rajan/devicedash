@@ -1,0 +1,67 @@
+{% extends 'devicedash/layout.html' %}
+{% load static %}
+{% block script %}
+    <script src="{% static 'devicedash/find.js' %}"></script>
+{% endblock %}
+{% block body %}
+<div class="container">
+<div class="phones-list gallery" id="phonelist">
+    <div style="display: flex;">
+        <input type="button" onclick="prev()" value="Prev" class="prev-next">
+        <ul class="cards">
+                <li>
+                    <div class="card card-card" style="width: 250px; height: 450px; overflow: hidden;">
+                        <div class="text-center">
+                            <img class="card-img-top" src="https://i02.appmifile.com/373_operatorx_operatorx_opx/10/05/2023/657e399a69e188fb194c3804f33fb67d!348x348.png" alt="{{ phone.img }}" style="width:150px;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Phone</h5>
+                            <p class="card-text">Curabitur tempor scelerisque sodales. Nunc rhoncus, erat </p>
+                        </div>
+                        <input type="button" value="View Phone" class="btn btn-danger viewphone mt-auto" data-id="100">
+                    </div>
+                </li>
+        </ul>
+        <input type="button" onclick="next()" value="Next" class="prev-next" id="nextbutton">
+    </div>
+</div>
+<script>
+
+    var currentCard = 0;
+
+    var cards = document.querySelectorAll('.cards li')
+
+    // Show a card and hide all others
+    function showCard(index) {
+        cards.forEach((card, i) => {
+            card.style.display = i === index ? 'block': 'none';
+
+            // Only display the last line of the phone description
+            card.querySelector('.card-text').innerHTML = getDescription(card);
+        });
+    }
+
+    function prev() {
+        currentCard = (currentCard - 1 + cards.length) % cards.length;
+        showCard(currentCard);
+    }
+
+    function next() {
+        currentCard = (currentCard + 1 + cards.length) % cards.length;
+        showCard(currentCard);
+    }
+
+    // Customise description
+    function getDescription(card) {
+        var description = card.querySelector('.card-text').innerHTML.split('.');
+        if (description.length > 1)
+            return description[3];
+        return description;
+    }
+
+    // Show the first card
+    showCard(currentCard);
+
+</script>
+</div>
+{% endblock %}

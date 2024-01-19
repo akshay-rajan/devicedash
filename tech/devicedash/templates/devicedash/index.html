@@ -1,0 +1,15 @@
+{% extends 'devicedash/layout.html' %}
+{% load static %}
+{% block body %}
+
+<h1 class="display-1">DeviceDash</h1>
+<div class="search-form form-group" id="search">
+    <form action="{% url 'find' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="nPriceMin" class="form-control" placeholder="Enter the minimum price" id="min" autofocus>
+        <input type="text" name="nPriceMax" class="form-control" placeholder="Enter the maximum price" id="max">
+        <input type="submit" value="Find" class="btn btn-sm btn-outline-danger bg-light" style="width:100%;" id="findbutton">
+    </form>
+    <!-- Low budget - Mid range - High budget -->
+</div>
+{% endblock %}
