@@ -8,6 +8,7 @@ async def getDataFromUrl(url):
 
     async with httpx.AsyncClient() as client:
         response = await client.get(f'https://www.gsmarena.com{url}')
+        # print(response.text[:100])
         return response.text
 
 async def getBrands():
@@ -149,7 +150,7 @@ async def getDevice(device):
     return {
         'name': name,
         'img': img,
-        'detail_spec': detail_spec,
         'quick_spec': quick_spec,
+        'detail_spec': detail_spec,
         'pricing': pricing
     }

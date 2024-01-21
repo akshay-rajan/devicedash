@@ -39,3 +39,9 @@ async def fetchphone(request, id):
 
     device_info = await getDevice(id)
     return JsonResponse(device_info)
+
+
+async def storeData(request):
+    """Get the details of all phones from the website and store it to our database"""
+    
+    pass

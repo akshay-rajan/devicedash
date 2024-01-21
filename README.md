@@ -13,8 +13,37 @@
 
  1. Analyze how to recommend the phones
     The website recommends the phones based on their popularity. Hence, we need to store that too.
-    Todo: Scrape popularity percentage
+    - Scrape popularity percentage --- Done
+
+
  2. Move all data to the database
+    1. Get the list of brands
+    2. For each brand, get the list of phones
+    3. For each phone, store all its details
+
+    Database Design:
+      1. Brands
+         |column|datatype|constraints|
+         |------|--------|-----------|
+         |brand_id|int|Primary Key|
+         |brand|string||
+      2. Phones
+         |column|datatype|constraints|
+         |------|--------|-----------|
+         |brand_id|int|Foreign Key|
+         |device_id|int|Primary Key|
+         |name|string||
+      3. Specifications
+         |column|datatype|constraints|
+         |------|--------|-----------|
+         |device_id|int|Foreign Key|
+         |name|string||
+         |img|binary||
+         |quick_spec|json||
+         |detail_spec|json||
+         |pricing|json||
+       
+
  3. Display phones according to user input
 
  ## Implementation
