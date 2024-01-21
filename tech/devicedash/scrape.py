@@ -107,7 +107,6 @@ async def getDevice(device):
         {'name': 'Chipset', 'value': chipset},
         {'name': 'Battery size', 'value': battery_size},
         {'name': 'Battery type', 'value': battery_type},
-        {'name': 'Popularity', 'value': popularity}
     ]
 
     name = soup.find('h1', {'class': 'specs-phone-name-title'}).text
@@ -152,5 +151,6 @@ async def getDevice(device):
         'img': img,
         'quick_spec': quick_spec,
         'detail_spec': detail_spec,
-        'pricing': pricing
+        'pricing': pricing,
+        'popularity': popularity        
     }

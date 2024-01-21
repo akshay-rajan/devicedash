@@ -37,12 +37,15 @@
          |column|datatype|constraints|
          |------|--------|-----------|
          |device_id|int|Foreign Key|
-         |name|string||
-         |img|binary||
+         |img|ImageField||
          |quick_spec|json||
          |detail_spec|json||
          |pricing|json||
+         |popularity|float||
        
+
+   * Create Models - Done
+   * Storing - ToDo
 
  3. Display phones according to user input
 
