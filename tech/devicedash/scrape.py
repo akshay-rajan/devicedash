@@ -10,17 +10,6 @@ async def getDataFromUrl(url):
         response = await client.get(f'https://www.gsmarena.com{url}')
         return response.text
 
-
-# def getPrice(text):
-#     """Split given text representing amount to currency and price"""
-#     value = text.replace(',', '').split(' ')
-#     result = {
-#         'currency': value[0],
-#         'price': float(value[1])
-#     }
-#     return result
-
-
 async def getBrands():
     """Return all brands as json objects in a list"""
 
@@ -105,6 +94,8 @@ async def getDevice(device):
     chipset = soup.find('div', {'data-spec': 'chipset-hl'}).text
     battery_size = soup.find('span', {'data-spec': 'batsize-hl'}).text
     battery_type = soup.find('div', {'data-spec': 'battype-hl'}).text
+    popularity_percentage = soup.find('li', class_='light pattern help help-popularity').find('strong').get_text(strip=True)
+    popularity = float(popularity_percentage.rstrip("%"))
 
     quick_spec = [
         {'name': 'Display size', 'value': display_size},
@@ -115,6 +106,7 @@ async def getDevice(device):
         {'name': 'Chipset', 'value': chipset},
         {'name': 'Battery size', 'value': battery_size},
         {'name': 'Battery type', 'value': battery_type},
+        {'name': 'Popularity', 'value': popularity}
     ]
 
     name = soup.find('h1', {'class': 'specs-phone-name-title'}).text

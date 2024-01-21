@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import asyncio
 
-from .scrape import getBrands, getBrand, getDevice, getDataFromUrl, getDevices, getNextPage
+from .scrape import getDevice, getDataFromUrl, getDevices
 
 def index(request):
     """Render the homepage"""
@@ -36,9 +36,6 @@ async def find(request):
 
 async def fetchphone(request, id):
     """Fetch information about a phone"""
-
-    # if id == 100:
-        # return JsonResponse({'works': 'fine'})
 
     device_info = await getDevice(id)
     return JsonResponse(device_info)
