@@ -1,0 +1,2 @@
+1. BeautifulSoup4
+2. Httpx
