@@ -46,7 +46,8 @@
 
    * Create Models - Done
    * Fetching - Done
-   * Storing - ToDo
+   * Storing Brands - Done
+   * Storing Phones - ToDo
    
  3. Display phones according to user input
 

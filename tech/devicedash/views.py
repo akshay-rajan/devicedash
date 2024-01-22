@@ -8,11 +8,16 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import asyncio
 import json
+from asgiref.sync import sync_to_async
 
 from .scrape import getDevice, getDataFromUrl, getDevices, getBrand, getBrands
+from .models import Brands, Phones, Specifications
+from .utils import async_saveBrand
+
 
 async def index(request):
     """Render the homepage"""
+
     await storeData(request)
     return render(request, "devicedash/index.html")
 
@@ -46,22 +51,24 @@ async def fetchphone(request, id):
 async def storeData(request):
     """Get the details of all phones from the website and store it to our database"""
     brands = await getBrands()
-    for brand in brands[:5]:
+    for brand in brands:
         brand_id = brand["id"]
         brand_name = brand["name"]
+        await async_saveBrand(brand_id, brand_name)
         print(brand_id, brand_name)
+
         
-        devices = await getBrand(brand_id)
-        for device in devices[:5]:
-            device_id = device["id"]
-            device_name = device["name"]
-            print(brand_id, device_id, device_name)
+        # devices = await getBrand(brand_id)
+        # for device in devices[:5]:
+        #     device_id = device["id"]
+        #     device_name = device["name"]
+        #     print(brand_id, device_id, device_name)
             
-            smartphone = await getDevice(device_id)
-            quick_spec = smartphone["quick_spec"]
-            detail_spec = smartphone["detail_spec"]
-            img = smartphone["img"]
-            pricing = smartphone["pricing"]
-            popularity = smartphone["popularity"]
-            print(device_id, img, quick_spec, detail_spec, pricing, popularity)
+        #     smartphone = await getDevice(device_id)
+        #     quick_spec = smartphone["quick_spec"]
+        #     detail_spec = smartphone["detail_spec"]
+        #     img = smartphone["img"]
+        #     pricing = smartphone["pricing"]
+        #     popularity = smartphone["popularity"]
+        #     print(device_id, img, quick_spec, detail_spec, pricing, popularity)
     
