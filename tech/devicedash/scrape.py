@@ -16,17 +16,17 @@ async def getBrands():
 
     response = await getDataFromUrl('/makers.php3')
     soup = BeautifulSoup(response, 'html.parser')
-    json_data = []
+    brands_data = []
     brands = soup.find_all('table')[0].find_all('td')
     for element in brands:
         links = element.find('a')
         spans = element.find('span')
-        json_data.append({
+        brands_data.append({
             'id': links['href'].replace('.php', ''),
             'name': links.get_text(strip=True).replace(' devices', '').replace('[0-9]', ''),
             'devices': int(spans.get_text(strip=True).replace(' devices', ''), 10),
         })
-    return JsonResponse(json_data, safe=False)
+    return brands_data
 
 
 def getNextPage(soup):
@@ -64,19 +64,19 @@ async def getBrand(brand):
 
     response = await getDataFromUrl(f"/{brand}.php")
     soup = BeautifulSoup(response, 'html.parser')
-    json_data = []
+    brand_data = []
 
     devices = getDevices(soup, soup.select('.makers li'))
-    json_data.extend(devices)
+    brand_data.extend(devices)
     # Iterate through all subsequent pages of devices
     while getNextPage(soup):
         nextPageUrl = getNextPage(soup)
         nextPage = await getDataFromUrl(nextPageUrl)
         soup = BeautifulSoup(nextPage, 'html.parser')
         devices = getDevices(soup, soup.select('.makers li'))
-        json_data.extend(devices)
+        brand_data.extend(devices)
 
-    return JsonResponse(json_data, safe=False)
+    return brand_data
 
 
 async def getDevice(device):
@@ -96,7 +96,10 @@ async def getDevice(device):
     battery_size = soup.find('span', {'data-spec': 'batsize-hl'}).text
     battery_type = soup.find('div', {'data-spec': 'battype-hl'}).text
     popularity_percentage = soup.find('li', class_='light pattern help help-popularity').find('strong').get_text(strip=True)
-    popularity = float(popularity_percentage.rstrip("%"))
+    try:
+        popularity = float(popularity_percentage.rstrip("%"))
+    except ValueError:
+        popularity = 0.0
 
     quick_spec = [
         {'name': 'Display size', 'value': display_size},

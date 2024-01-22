@@ -45,15 +45,16 @@
        
 
    * Create Models - Done
+   * Fetching - Done
    * Storing - ToDo
-
+   
  3. Display phones according to user input
 
  ## Implementation
 
 ### scrape.py
 * getDataFromUrl(url) - returns the source of a page
-* getBrands() - returns a Json list of all brands
+* getBrands() - returns a list of all brands
 * getBrand(brand_id) - returns a list of all phones of a particular brand
 * getNextPage(beautifulsoup_object) - returns the next page, if there is one
 * getDevice(device_id) - returns all details regarding a device
