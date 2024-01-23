@@ -30,13 +30,13 @@
       2. Phones
          |column|datatype|constraints|
          |------|--------|-----------|
-         |brand_id|int|Foreign Key|
+         |brand|Brands|Foreign Key|
          |device_id|int|Primary Key|
          |name|string||
       3. Specifications
          |column|datatype|constraints|
          |------|--------|-----------|
-         |device_id|int|Foreign Key|
+         |device|Phones|Foreign Key|
          |img|ImageField||
          |quick_spec|json||
          |detail_spec|json||
