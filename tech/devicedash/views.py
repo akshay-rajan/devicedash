@@ -8,6 +8,8 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import asyncio
 import json
+import random
+from time import sleep
 from asgiref.sync import sync_to_async
 
 from .scrape import getDevice, getDataFromUrl, getDevices, getBrand, getBrands
@@ -58,7 +60,8 @@ async def storeData(request):
         print(brand_id, brand_name)
 
         
-        devices = await getBrand(brand_id)
+        # devices = await getBrand(brand_id)
+        devices = await getBrand("samsung-phones-9")
         for device in devices[:2]:
             device_id = device["id"]
             device_name = device["name"]
@@ -72,4 +75,5 @@ async def storeData(request):
             popularity = smartphone["popularity"]
             # await async_saveSpecs(device_id, img, quick_spec, pricing, popularity)
             print(device_id, img, quick_spec, pricing, popularity)
+            sleep(random.randint(1, 6))
     
