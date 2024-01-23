@@ -84,7 +84,6 @@ async def getDevice(device):
 
     url = f'/{device}.php'
     html = await getDataFromUrl(url)
-    print(html[:500])
     soup = BeautifulSoup(html, 'html.parser')
 
     display_size = soup.find('span', {'data-spec': 'displaysize-hl'}).text

@@ -121,3 +121,32 @@ yota-phones-99 Yota3
 yu-phones-100 YU13
 zte-phones-62 ZTE369
 
+from django.db.models import Q
+
+# Assuming you have the price range defined as min_price and max_price
+min_price = 500  # Replace with your desired minimum price
+max_price = 1000  # Replace with your desired maximum price
+
+# Get devices within the specified price range with descending popularity
+devices_in_price_range = Specifications.objects.filter(
+    Q(pricing__gte=min_price) & Q(pricing__lte=max_price)
+).order_by('-popularity')
+
+# Now, you can iterate over the queryset to access the devices
+for specification in devices_in_price_range:
+    print(specification.device.name, specification.pricing, specification.popularity)
+
+acer_chromebook_tab_10-9139
+https://fdn2.gsmarena.com/vv/bigpic/acer-chromebook-tab-10.jpg
+[
+    {'name': 'Display size', 'value': '9.7"'}, 
+    {'name': 'Display resolution', 'value': '1536x2048 pixels'},
+    {'name': 'Camera pixels', 'value': '5'},
+    {'name': 'Video pixels', 'value': '720p'},
+    {'name': 'RAM size', 'value': '4'},
+    {'name': 'Chipset', 'value': 'Rockchip RK3399'},
+    {'name': 'Battery size', 'value': '4500'},
+    {'name': 'Battery type', 'value': 'Li-Po'}
+]
+[] [] 0.1
+

@@ -39,7 +39,6 @@
          |device|Phones|Foreign Key|
          |img|ImageField||
          |quick_spec|json||
-         |detail_spec|json||
          |pricing|json||
          |popularity|float||
        
@@ -47,7 +46,8 @@
    * Create Models - Done
    * Fetching - Done
    * Storing Brands - Done
-   * Storing Phones - ToDo
+   * Storing Phones - Done
+   * Storing Specs - Todo
    
  3. Display phones according to user input
 
