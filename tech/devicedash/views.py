@@ -20,7 +20,6 @@ from .utils import async_saveBrand, async_saveDevice, async_saveSpecs
 async def index(request):
     """Render the homepage"""
 
-    await storeData(request)
     return render(request, "devicedash/index.html")
 
 async def find(request):
@@ -52,28 +51,31 @@ async def fetchphone(request, id):
 
 async def storeData(request):
     """Get the details of all phones from the website and store it to our database"""
-    brands = await getBrands()
-    for brand in brands[:2]:
-        brand_id = brand["id"]
-        brand_name = brand["name"]
-        # await async_saveBrand(brand_id, brand_name)
-        print(brand_id, brand_name)
+    
+    brands = ["apple-phones-48", "asus-phones-46", "blackberry-phones-36", "google-phones-107", "honor-phones-121", "htc-phones-45", "huawei-phones-58", "infinix-phones-119", "karbonn-phones-83", "lava-phones-94", "lenovo-phones-73", "lg-phones-20", "micromax-phones-66", "microsoft-phones-64", "motorola-phones-4", "nokia-phones-1", "nothing-phones-128", "oneplus-phones-95", "oppo-phones-82", "realme-phones-118", "samsung-phones-9", "sharp-phones-23", "sony-phones-7", "spice-phones-68", "tecno-phones-120", "vivo-phones-98", "xiaomi-phones-80", "zte-phones-62"]
 
+    for brand_id in brands:
+        # await async_saveBrand(brand_id, brand_name)
+        print(brand_id)
         
-        # devices = await getBrand(brand_id)
-        devices = await getBrand("samsung-phones-9")
-        for device in devices[:2]:
+        devices = await getBrand(brand_id)
+        for device in devices:
             device_id = device["id"]
             device_name = device["name"]
-            # await async_saveDevice(brand_id, device_id, device_name)
+            await async_saveDevice(brand_id, device_id, device_name)
             print(brand_id, device_id, device_name)
             
             smartphone = await getDevice(device_id)
             quick_spec = smartphone["quick_spec"]
             img = smartphone["img"]
             pricing = smartphone["pricing"]
+            if pricing == '':
+                continue
             popularity = smartphone["popularity"]
-            # await async_saveSpecs(device_id, img, quick_spec, pricing, popularity)
+            try:
+                await async_saveSpecs(device_id, img, quick_spec, pricing, popularity)
+            except:
+                continue
             print(device_id, img, quick_spec, pricing, popularity)
             sleep(random.randint(1, 6))
     

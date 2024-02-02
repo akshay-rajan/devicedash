@@ -16,7 +16,7 @@ class Phones(models.Model):
         return f"{self.name} ({self.device_id})"
     
 class Specifications(models.Model):
-    device = models.ForeignKey(Phones, on_delete=models.CASCADE) 
+    device = models.OneToOneField(Phones, on_delete=models.CASCADE) 
     img = models.CharField(max_length=255)
     quick_spec = models.JSONField(null=True, blank=True)
     pricing = models.JSONField(null=True, blank=True)

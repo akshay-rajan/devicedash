@@ -6,8 +6,16 @@ import httpx
 async def getDataFromUrl(url):
     """Return the source of a page"""
 
+    headers = {
+        "Referer": "https://www.google.com/",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Upgrade-Insecure-Requests": "1",
+        "User-Agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/W.X.Y.Z Safari/537.36"
+    }
+    
     async with httpx.AsyncClient() as client:
-        response = await client.get(f'https://www.gsmarena.com{url}')
+        response = await client.get(f'https://www.gsmarena.com{url}', headers=headers, timeout=(None, None))
         print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",response.text[23:40], ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         return response.text
 
@@ -86,15 +94,25 @@ async def getDevice(device):
     html = await getDataFromUrl(url)
     soup = BeautifulSoup(html, 'html.parser')
 
-    display_size = soup.find('span', {'data-spec': 'displaysize-hl'}).text
-    display_res = soup.find('div', {'data-spec': 'displayres-hl'}).text
-    camera_pixels = soup.find('span', {'data-spec': 'camerapixels-hl'}).text
-    video_pixels = soup.find('div', {'data-spec': 'videopixels-hl'}).text
-    ram_size = soup.find('span', {'data-spec': 'ramsize-hl'}).text
-    chipset = soup.find('div', {'data-spec': 'chipset-hl'}).text
-    battery_size = soup.find('span', {'data-spec': 'batsize-hl'}).text
-    battery_type = soup.find('div', {'data-spec': 'battype-hl'}).text
-    popularity_percentage = soup.find('li', class_='light pattern help help-popularity').find('strong').get_text(strip=True)
+    try:
+        display_size = soup.find('span', {'data-spec': 'displaysize-hl'}).text
+        display_res = soup.find('div', {'data-spec': 'displayres-hl'}).text
+        camera_pixels = soup.find('span', {'data-spec': 'camerapixels-hl'}).text
+        video_pixels = soup.find('div', {'data-spec': 'videopixels-hl'}).text
+        ram_size = soup.find('span', {'data-spec': 'ramsize-hl'}).text
+        chipset = soup.find('div', {'data-spec': 'chipset-hl'}).text
+        battery_size = soup.find('span', {'data-spec': 'batsize-hl'}).text
+        battery_type = soup.find('div', {'data-spec': 'battype-hl'}).text
+        popularity_percentage = soup.find('li', class_='light pattern help help-popularity').find('strong').get_text(strip=True)
+    except:
+        return {
+            'name': '',
+            'img': '',
+            'quick_spec': '',
+            'detail_spec': '',
+            'pricing': '',
+            'popularity': '' 
+        }
     try:
         popularity = float(popularity_percentage.rstrip("%"))
     except ValueError:

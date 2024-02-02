@@ -10,7 +10,7 @@ def saveDevice(brand_id, device_id, device_name):
     device_data = Phones(brand=brand, device_id=device_id, name=device_name)
     device_data.save()
     
-def saveSpecs(device_id, img, quick_spec, detail_spec, pricing, popularity):
+def saveSpecs(device_id, img, quick_spec, pricing, popularity):
     device = Phones.objects.get(device_id=device_id)
     specs = Specifications(device=device, img=img, quick_spec=quick_spec, pricing=pricing, popularity=popularity)
     specs.save()
