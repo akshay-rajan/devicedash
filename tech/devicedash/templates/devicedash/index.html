@@ -6,8 +6,8 @@
 <div class="search-form form-group" id="search">
     <form action="{% url 'find' %}" method="post">
         {% csrf_token %}
-        <input type="text" name="nPriceMin" class="form-control" placeholder="Enter the minimum price" id="min" autofocus>
-        <input type="text" name="nPriceMax" class="form-control" placeholder="Enter the maximum price" id="max">
+        <input type="text" name="nPriceMin" class="form-control" placeholder="Enter the minimum price" id="min" autofocus required>
+        <input type="text" name="nPriceMax" class="form-control" placeholder="Enter the maximum price" id="max" required>
         <input type="submit" value="Find" class="btn btn-sm btn-outline-danger bg-light" style="width:100%;" id="findbutton">
     </form>
     <!-- Low budget - Mid range - High budget -->

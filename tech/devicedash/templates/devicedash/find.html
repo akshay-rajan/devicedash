@@ -14,13 +14,25 @@
                 <li>
                     <div class="card card-card" style="width: 250px; height: 450px; overflow: hidden;">
                         <div class="text-center">
-                            <img class="card-img-top" src="{{ phone.img }}" alt="{{ phone.img }}" style="width:150px;">
+                            <img class="card-img-top" src="{{ phone.image }}" alt="{{ phone.image }}" style="width:150px;">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ phone.name }}</h5>
-                            <p class="card-text">{{ phone.description }}</p>
+                            <p class="card-text">
+                                {% for spec in phone.quick_spec %}
+                                    {% if spec.name == 'Display size' %}
+                                        <div class="qs">{{ spec.value }} screen.</div>
+                                    {% elif spec.name == 'RAM size' %}
+                                        <div class="qs">{{ spec.value }} GB RAM</div>
+                                    {% elif spec.name == 'Camera pixels' %}
+                                        <div class="qs">{{ spec.value }} MP Main Camera</div>
+                                    {% elif spec.name == 'Chipset' %}
+                                        <div class="qs">{{ spec.value }} Chipset</div>
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
                         </div>
-                        <input type="button" value="View Phone" class="btn btn-danger viewphone mt-auto" data-id="{{ phone.id }}">
+                        <input type="button" value="View Phone" class="btn btn-danger viewphone mt-auto" data-id="{{ phone.phone_id }}">
                     </div>
                 </li>
             {% endfor %}

@@ -23,47 +23,75 @@ def index(request):
     
     return render(request, "devicedash/index.html")
 
-async def find(request):
-    """Render a page containg the best devices according to the user's price range"""
-
-    if request.method == "POST":
-        min = request.POST["nPriceMin"]
-        max = request.POST["nPriceMax"]
-
-        response = await getDataFromUrl(f"/results.php3?nPriceMin={min}&nPriceMax={max}")
-        soup = BeautifulSoup(response, 'html.parser')
-        await asyncio.sleep(1)
-        json_data = []
-
-        devices = getDevices(soup, soup.select('.makers li'))
-        json_data.extend(devices)
-        json_data = json_data[:10]
-        return render(request, "devicedash/find.html", {
-            "data": json_data,
-        })
-
-# def find(request):
-#     """Render a page containing the best devices according to the price range entered"""
+# async def find(request):
+#     """Render a page containg the best devices according to the user's price range"""
 
 #     if request.method == "POST":
-#         min_price = request.POST["nPriceMin"]
-#         max_price = request.POST["nPriceMax"]
-#         min_price = 10000
-#         min_price = 20000
-        
-#         # Return the top 10 devices according to popularity within the price range
-#         devices = Specifications.objects.annotate(
-#         first_price=Substr(F('pricing'), 14, 5, output_field=IntegerField())
-#         ).filter(
-#             first_price__price__gte=min_price,
-#             first_price__price__lte=max_price
-#         ).order_by("-popularity")[:10]
-#         print(devices)
-        
-        
+#         min = request.POST["nPriceMin"]
+#         max = request.POST["nPriceMax"]
+
+#         response = await getDataFromUrl(f"/results.php3?nPriceMin={min}&nPriceMax={max}")
+#         soup = BeautifulSoup(response, 'html.parser')
+#         await asyncio.sleep(1)
+#         json_data = []
+
+#         devices = getDevices(soup, soup.select('.makers li'))
+#         json_data.extend(devices)
+#         json_data = json_data[:10]
 #         return render(request, "devicedash/find.html", {
-#             "data": {},
+#             "data": json_data,
 #         })
+
+def find(request):
+    """Render a page containing the best devices according to the price range entered"""
+    
+    def cleanup(name):
+        seen = set()
+        res = []
+        for word in name.split():
+            if word not in seen:
+                seen.add(word)
+                res.append(word)
+        return " ".join(res)
+            
+
+    if request.method == "POST":
+        min_price = request.POST["nPriceMin"]
+        max_price = request.POST["nPriceMax"]
+        
+        # Return the top 10 devices according to popularity within the price range
+        devices = Devices.objects.filter(
+            price__gte=min_price,
+            price__lte=max_price
+        ).order_by('-popularity')[:10]
+        
+        data = []
+        for device in devices:
+            brand = device.brand
+            brand_name = brand.brand
+            phone = device.device
+            device_name = cleanup(phone.name)
+            specs = Specifications.objects.get(device=phone)
+            img_url = specs.img
+            quick_spec = specs.quick_spec
+            
+            price = device.price
+            popularity = device.popularity
+            data.extend([{
+                'phone_id': phone.device_id,
+                'brand': brand_name,
+                'name': device_name,
+                'image': img_url,
+                'quick_spec': quick_spec,
+                'price': price,
+                'popularity': popularity
+            }])
+            
+        print(data[:1])
+        
+        return render(request, "devicedash/find.html", {
+            "data": data 
+        })
 
 
 
@@ -129,3 +157,5 @@ def storeToDevices(request):
             d.save()
         except:
             continue
+        
+        
