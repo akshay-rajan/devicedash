@@ -18,9 +18,9 @@ from .models import Brands, Phones, Specifications, Devices
 from .utils import async_saveBrand, async_saveDevice, async_saveSpecs
 
 
-async def index(request):
+def index(request):
     """Render the homepage"""
-
+    
     return render(request, "devicedash/index.html")
 
 async def find(request):
@@ -105,9 +105,27 @@ async def storeData(request):
             sleep(random.randint(1, 6))
     
 def storeToDevices(request):
-    """Store the details of each phone in 'Devices'"""
+    """Store the details of each phone in 'Devices' to access in 'find'"""
+    
+    def convert_price(item):
+        currency = item[1]["price"].split()[0]
+        value = float(item[1]["price"].replace(currency, "").replace(",", "").strip())
+        if currency == "$":
+            return value * 82.9
+        return value
+        
     
     all_devices = Specifications.objects.all()
-    for device in all_devices:
-    
-    pass
+    for phone in all_devices:
+        device = phone.device
+        brand = device.brand
+        prices = [convert_price(item) for item in phone.pricing]
+        if not prices:
+            continue
+        price = min(prices)
+        popularity = phone.popularity
+        try:
+            d = Devices(brand=brand, device=device, price=price, popularity=popularity)
+            d.save()
+        except:
+            continue

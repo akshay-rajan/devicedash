@@ -28,7 +28,7 @@ class Specifications(models.Model):
 class Devices(models.Model):
     brand = models.ForeignKey(Brands, on_delete=models.CASCADE)
     device = models.OneToOneField(Phones, on_delete=models.CASCADE) 
-    price = models.IntegerField(null=True, blank=True)
+    price = models.FloatField(null=True, blank=True)
     popularity = models.FloatField(null=True, blank=True)
 
     def __str__(self):

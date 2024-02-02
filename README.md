@@ -58,7 +58,8 @@
       |device|f-key|
       |price|int|
       |popularity|float|
-   * Storing in Devices - Todo
+   * Storing in Devices - Done
+   * Find Phone - Todo
 
 
 
