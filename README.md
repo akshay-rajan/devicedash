@@ -37,7 +37,7 @@
          |column|datatype|constraints|
          |------|--------|-----------|
          |device|Phones|Foreign Key|
-         |img|ImageField||
+         |img|url||
          |quick_spec|json||
          |pricing|json||
          |popularity|float||
@@ -47,7 +47,21 @@
    * Fetching - Done
    * Storing Brands - Done
    * Storing Phones - Done
-   * Storing Specs - Todo
+   * Storing Specs - Done
+   * Fetching Database === Fail
+      New Table to create
+   * Create "Devices" - Done
+
+      |column|datatype|
+      |------|--------|
+      |brand|f-key|
+      |device|f-key|
+      |price|int|
+      |popularity|float|
+   * Storing in Devices - Todo
+
+
+
    
  3. Display phones according to user input
 

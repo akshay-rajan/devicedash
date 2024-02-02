@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
-from django.db import IntegrityError
+from django.db.models import Q, Case, When, Value, IntegerField, F, JSONField
+from django.db.models.functions import Substr
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -13,7 +14,7 @@ from time import sleep
 from asgiref.sync import sync_to_async
 
 from .scrape import getDevice, getDataFromUrl, getDevices, getBrand, getBrands
-from .models import Brands, Phones, Specifications
+from .models import Brands, Phones, Specifications, Devices
 from .utils import async_saveBrand, async_saveDevice, async_saveSpecs
 
 
@@ -40,6 +41,30 @@ async def find(request):
         return render(request, "devicedash/find.html", {
             "data": json_data,
         })
+
+# def find(request):
+#     """Render a page containing the best devices according to the price range entered"""
+
+#     if request.method == "POST":
+#         min_price = request.POST["nPriceMin"]
+#         max_price = request.POST["nPriceMax"]
+#         min_price = 10000
+#         min_price = 20000
+        
+#         # Return the top 10 devices according to popularity within the price range
+#         devices = Specifications.objects.annotate(
+#         first_price=Substr(F('pricing'), 14, 5, output_field=IntegerField())
+#         ).filter(
+#             first_price__price__gte=min_price,
+#             first_price__price__lte=max_price
+#         ).order_by("-popularity")[:10]
+#         print(devices)
+        
+        
+#         return render(request, "devicedash/find.html", {
+#             "data": {},
+#         })
+
 
 
 async def fetchphone(request, id):
@@ -79,3 +104,10 @@ async def storeData(request):
             print(device_id, img, quick_spec, pricing, popularity)
             sleep(random.randint(1, 6))
     
+def storeToDevices(request):
+    """Store the details of each phone in 'Devices'"""
+    
+    all_devices = Specifications.objects.all()
+    for device in all_devices:
+    
+    pass
