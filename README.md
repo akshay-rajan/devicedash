@@ -59,7 +59,8 @@
       |price|int|
       |popularity|float|
    * Storing in Devices - Done
-   * Find Phone - Todo
+   * Find Phone - Done
+   * View Phone - todo
 
 
 
