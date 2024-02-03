@@ -1,0 +1,61 @@
+{% extends 'devicedash/layout.html' %}
+{% load static %}
+{% block style %}
+<style>
+    .container, .left, .right {
+        margin: 30px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .back {
+        text-align: right;
+    }
+    table, tr, td {
+        border: 1px solid red;
+        border-collapse: collapse;
+    }
+    table {
+        width: 100%;
+        background-color: #ad2371;
+        height: 280px;
+    }
+    td {
+        height: 20px;
+    }
+    .price {
+        text-align: center;
+        height: 35px;
+        background-color: #6136b3;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    {% if data %}
+    <div class="left">
+        <img src="{{ data.img }}" alt="{{ data.img }}">
+    </div>
+    <div class="right" id="device-info">
+        <h1 style>Device Information</h1><br>
+        {{ data }}
+        <table class="details">
+            {% for spec in data.quick_spec %}
+                <tr>
+                    <th>{{ spec.name }}</th>
+                    <td>{{ spec.value }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            <div class="price">
+                Price Starting From ₹ {{ data.price }}/-
+            </div>
+        </div>
+    {% else %}
+        <h1>No Data.</h1>
+    {% endif %}
+</div>
+<div class="back">
+    <a src=""><button>Back</button></a>
+</div>
+{% endblock %}

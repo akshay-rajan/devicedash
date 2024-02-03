@@ -7,6 +7,6 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("find", views.find, name="find"),
-    path("find/<str:id>", views.fetchphone, name="fetchphone")
+    path("find/<str:id>", views.viewPhone, name="viewPhone")
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

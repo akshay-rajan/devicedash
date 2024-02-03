@@ -15,7 +15,7 @@ from asgiref.sync import sync_to_async
 
 from .scrape import getDevice, getDataFromUrl, getDevices, getBrand, getBrands
 from .models import Brands, Phones, Specifications, Devices
-from .utils import async_saveBrand, async_saveDevice, async_saveSpecs
+from .utils import async_saveBrand, async_saveDevice, async_saveSpecs, cleanup
 
 
 def index(request):
@@ -45,14 +45,6 @@ def index(request):
 def find(request):
     """Render a page containing the best devices according to the price range entered"""
     
-    def cleanup(name):
-        seen = set()
-        res = []
-        for word in name.split():
-            if word not in seen:
-                seen.add(word)
-                res.append(word)
-        return " ".join(res)
             
 
     if request.method == "POST":
@@ -93,14 +85,32 @@ def find(request):
             "data": data 
         })
 
+def viewPhone(request, id):
+    
+    device = Phones.objects.get(device_id=id)
+    specs = Specifications.objects.get(device=device)
+    brand = device.brand
+    other = Devices.objects.get(device=device)
+    
+    data = {
+        "brand": brand.brand,
+        "name": cleanup(device.name),
+        "img": specs.img,
+        "quick_spec": specs.quick_spec,
+        "price": other.price,
+        "popularity": other.popularity,        
+    }    
+    
+    return render(request, "devicedash/view.html", {
+        "data": data
+    })
+    
 
+# async def fetchphone(request, id):
+#     """Fetch information about a phone"""
 
-async def fetchphone(request, id):
-    """Fetch information about a phone"""
-
-    device_info = await getDevice(id)
-    return JsonResponse(device_info)
-
+#     device_info = await getDevice(id)
+#     return JsonResponse(device_info)
 
 async def storeData(request):
     """Get the details of all phones from the website and store it to our database"""

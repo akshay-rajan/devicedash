@@ -19,3 +19,13 @@ def saveSpecs(device_id, img, quick_spec, pricing, popularity):
 async_saveBrand = sync_to_async(saveBrand)
 async_saveDevice = sync_to_async(saveDevice)
 async_saveSpecs = sync_to_async(saveSpecs)
+
+
+def cleanup(name):
+    seen = set()
+    res = []
+    for word in name.split():
+        if word not in seen:
+            seen.add(word)
+            res.append(word)
+    return " ".join(res)

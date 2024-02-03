@@ -58,7 +58,7 @@
       |device|f-key|
       |price|int|
       |popularity|float|
-   * Storing in Devices - Done
+   * Storing in Devices - Done (currency conversion)
    * Find Phone - Done
    * View Phone - todo
 

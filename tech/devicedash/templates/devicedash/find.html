@@ -32,16 +32,9 @@
                                 {% endfor %}
                             </p>
                         </div>
-                        <input type="button" value="View Phone" class="btn btn-danger viewphone mt-auto" data-id="{{ phone.phone_id }}">
+                        <a href="{% url 'viewPhone' phone.phone_id %}"><input type="button" value="View Phone" class="btn btn-danger viewphone mt-auto" data-id="{{ phone.phone_id }}"></a>
                     </div>
                 </li>
-                <div id="viewphone" style="display: none;">
-                    {{ phone.image }}
-                    {{ phone.name }}
-                    {{ phone.quick_spec }}
-                    {{ phone.popularity }}
-                    {{ phone.price }}
-                </div>
             {% endfor %}
         </ul>
         <input type="button" onclick="next()" value="Next" class="prev-next" id="nextbutton">
