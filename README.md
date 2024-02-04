@@ -61,8 +61,9 @@
    * Storing in Devices - Done (currency conversion)
    * Find Phone - Done
    * View Phone - Done
-   * Home - Todo 
-   * Star -
+   * Home - Done 
+   * Login - Todo
+   * Add Phone - 
 
 
 

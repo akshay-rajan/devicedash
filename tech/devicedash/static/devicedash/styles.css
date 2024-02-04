@@ -10,6 +10,14 @@ body {
 nav {
     background-color: #872341!important;
 }
+.nav-item {
+    text-align: center;
+    width: 120px;
+}
+
+.nav-item:hover {
+    background-color: #22092C!important;
+}
 
 .search-form {
     text-align: center;
