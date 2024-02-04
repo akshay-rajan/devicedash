@@ -7,6 +7,7 @@
     }
     h1 {
         text-align: center;
+        font-family: sans-serif;
     }
     .back {
         text-align: right;
@@ -16,17 +17,29 @@
         border-collapse: collapse;
     }
     table {
-        width: 100%;
-        background-color: #ad2371;
-        height: 280px;
+        width: 700px;
+        background-color: #872341;
+        height: 300px;
     }
-    td {
+    td, th {
         height: 20px;
+        margin: 3px;
+        padding: 8px;  
     }
     .price {
+        margin: 4px;
+        margin-left: 180px;
+        width: 50%;
         text-align: center;
         height: 35px;
-        background-color: #6136b3;
+        background-color: #F05941;
+        color: #22092C;
+    }
+    h2 {
+        margin: 10px;
+    }
+    .left {
+        align-items: center;
     }
 </style>
 {% endblock %}
@@ -35,10 +48,10 @@
     {% if data %}
     <div class="left">
         <img src="{{ data.img }}" alt="{{ data.img }}">
+        <h2>{{ data.brand }} {{ data.name }}</h3>
     </div>
     <div class="right" id="device-info">
         <h1 style>Device Information</h1><br>
-        {{ data }}
         <table class="details">
             {% for spec in data.quick_spec %}
                 <tr>
@@ -48,14 +61,11 @@
             {% endfor %}
             </table>
             <div class="price">
-                Price Starting From ₹ {{ data.price }}/-
+                Starting From ₹ {{ data.price }}/-
             </div>
         </div>
     {% else %}
         <h1>No Data.</h1>
     {% endif %}
-</div>
-<div class="back">
-    <a src=""><button>Back</button></a>
 </div>
 {% endblock %}

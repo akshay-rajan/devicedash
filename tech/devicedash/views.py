@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-import asyncio
+import re
 import json
 import random
 from time import sleep
@@ -47,9 +47,9 @@ def find(request):
     
             
 
-    if request.method == "POST":
-        min_price = request.POST["nPriceMin"]
-        max_price = request.POST["nPriceMax"]
+    if request.method == "GET":
+        min_price = request.GET["nPriceMin"]
+        max_price = request.GET["nPriceMax"]
         
         # Return the top 10 devices according to popularity within the price range
         devices = Devices.objects.filter(
@@ -93,11 +93,11 @@ def viewPhone(request, id):
     other = Devices.objects.get(device=device)
     
     data = {
-        "brand": brand.brand,
+        "brand": re.sub(r'\d+$', '', brand.brand),
         "name": cleanup(device.name),
         "img": specs.img,
         "quick_spec": specs.quick_spec,
-        "price": other.price,
+        "price": f"{other.price:.02f}",
         "popularity": other.popularity,        
     }    
     

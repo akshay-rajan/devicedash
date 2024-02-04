@@ -4,7 +4,7 @@
 
 <h1 class="display-1">DeviceDash</h1>
 <div class="search-form form-group" id="search">
-    <form action="{% url 'find' %}" method="post">
+    <form action="{% url 'find' %}" method="get">
         {% csrf_token %}
         <input type="text" name="nPriceMin" class="form-control" placeholder="Enter the minimum price" id="min" autofocus required>
         <input type="text" name="nPriceMax" class="form-control" placeholder="Enter the maximum price" id="max" required>

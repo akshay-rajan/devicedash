@@ -23,40 +23,37 @@
 // })
 
 
-// // function displayPhone(viewbutton) {
+// function displayPhone(viewbutton) {
 
-// //   // Display the phone in detail
-// //   let phone_id = viewbutton.dataset.id;
-// //   console.log(phone_id);
-// //   // fetch(`/find/${phone_id}`)
-// //   // .then(response => {
-// //   //   if (!response.ok) {
-// //   //     throw new Error(`Response not ok: ${response.status}`);
-// //   //   }
-// //   //   return response.json();
-// //   //   })
-// //   // .then(data => {
-// //   //   console.log(data);
+//   // Display the phone in detail
+//   let phone_id = viewbutton.dataset.id;
+//   console.log(phone_id);
+//   fetch('view.html')
+//     .then(response => response.text())
+//     .then(html => {
+//         phoneListDiv.innerHTML = html;
+//     })
+//     .catch(error => console.error('Error loading page:', error));
 
-// //   // Hide and Show the appropriate divs
-// //   let phoneListDiv = document.getElementById('phonelist');
+//   // Hide and Show the appropriate divs
+//   let phoneListDiv = document.getElementById('phonelist');
 // //   let viewPhoneDiv = document.getElementById('viewphone');
-// //   phoneListDiv.style.display = 'none';
-// //   viewPhoneDiv.style.display = 'block';
+//   phoneListDiv.style.display = 'none';
+//   viewPhoneDiv.style.display = 'block';
   
-// //   // Display the Details
-// //   viewPhoneDiv.innerHTML = '<button>heyyy</button>';
-// //     // Create 'Back' button
-// //   let backButton = document.querySelector('.backbutton');
-// //   if (!backButton) {
-// //     backButton = document.createElement('button');
-// //     backButton.classList.add('btn', 'btn-primary', 'backbutton');
-// //     backButton.textContent = "Back";
-// //     viewPhoneDiv.appendChild(backButton);
-// //   }
-// //   backButton.addEventListener('click', () => {
-// //     phoneListDiv.style.display = 'block';
-// //     viewPhoneDiv.style.display = 'none';
-// //   });
-// // }
+//   // Display the Details
+//   viewPhoneDiv.innerHTML = '<button>heyyy</button>';
+//     // Create 'Back' button
+//   let backButton = document.querySelector('.backbutton');
+//   if (!backButton) {
+//     backButton = document.createElement('button');
+//     backButton.classList.add('btn', 'btn-primary', 'backbutton');
+//     backButton.textContent = "Back";
+//     viewPhoneDiv.appendChild(backButton);
+//   }
+//   backButton.addEventListener('click', () => {
+//     phoneListDiv.style.display = 'block';
+//     viewPhoneDiv.style.display = 'none';
+//   });
+// }
 

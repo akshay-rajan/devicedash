@@ -15,9 +15,13 @@ nav {
     text-align: center;
     margin: auto;
     margin-top: 50px;
-    padding: 20px;
+    padding: 5px;
     width: 40%;
     background-color: #BE3144!important;
+}
+.search-form input[type="submit"] {
+    background-color: #F05941!important;
+    color: white!important;
 }
 
 .phones-list {
