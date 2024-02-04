@@ -1,15 +1,40 @@
 {% extends 'devicedash/layout.html' %}
 {% load static %}
 {% block body %}
+{% block script %}
+    <script src="{% static 'devicedash/index.js' %}"></script>
+{% endblock %}
 
-<h1 class="display-1">DeviceDash</h1>
+<div class="container main-heading">
+    <div class="main-left">
+        <h1 class="display-1">DeviceDash</h1>
+    </div>
+    <div class="main-right">
+        Find Your Perfect Smartphone.
+    </div>
+</div>
 <div class="search-form form-group" id="search">
-    <form action="{% url 'find' %}" method="get">
+    <form action="{% url 'find' %}" method="get" onsubmit="return validateForm()">
         {% csrf_token %}
         <input type="text" name="nPriceMin" class="form-control" placeholder="Enter the minimum price" id="min" autofocus required>
         <input type="text" name="nPriceMax" class="form-control" placeholder="Enter the maximum price" id="max" required>
         <input type="submit" value="Find" class="btn btn-sm btn-outline-danger bg-light" style="width:100%;" id="findbutton">
     </form>
-    <!-- Low budget - Mid range - High budget -->
+
+    <div class="default-buttons">
+        <button class="btn btn-sm btn-outline-danger bg-light defaultPrice" onclick="setDefaults(0, 0, 15000)">
+            Budget<br>Upto ₹15,000
+        </button>
+        <button class="btn btn-sm btn-outline-danger bg-light defaultPrice" onclick="setDefaults(1, 15000, 40000)">
+            Mid Range<br>₹15,000 - ₹40,000
+        </button>
+        <button class="btn btn-sm btn-outline-danger bg-light defaultPrice" onclick="setDefaults(2, 40001, 1000000)">
+            Flagship<br>Above ₹40,000
+        </button>
+        <div id="validationMessage" style="color: white;"></div>
+    </div>
+</div>
+<div class="description">
+    Simply enter your desired price range or pick your budget. We'll help you discover smartphones that match your criteria.
 </div>
 {% endblock %}
