@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q, Case, When, Value, IntegerField, F, JSONField
 from django.db.models.functions import Substr
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import re
@@ -23,24 +24,6 @@ def index(request):
     
     return render(request, "devicedash/index.html")
 
-# async def find(request):
-#     """Render a page containg the best devices according to the user's price range"""
-
-#     if request.method == "POST":
-#         min = request.POST["nPriceMin"]
-#         max = request.POST["nPriceMax"]
-
-#         response = await getDataFromUrl(f"/results.php3?nPriceMin={min}&nPriceMax={max}")
-#         soup = BeautifulSoup(response, 'html.parser')
-#         await asyncio.sleep(1)
-#         json_data = []
-
-#         devices = getDevices(soup, soup.select('.makers li'))
-#         json_data.extend(devices)
-#         json_data = json_data[:10]
-#         return render(request, "devicedash/find.html", {
-#             "data": json_data,
-#         })
 
 def find(request):
     """Render a page containing the best devices according to the price range entered"""
@@ -84,6 +67,7 @@ def find(request):
         return render(request, "devicedash/find.html", {
             "data": data 
         })
+        
 
 def viewPhone(request, id):
     
@@ -104,13 +88,7 @@ def viewPhone(request, id):
     return render(request, "devicedash/view.html", {
         "data": data
     })
-    
 
-# async def fetchphone(request, id):
-#     """Fetch information about a phone"""
-
-#     device_info = await getDevice(id)
-#     return JsonResponse(device_info)
 
 async def storeData(request):
     """Get the details of all phones from the website and store it to our database"""
@@ -142,6 +120,7 @@ async def storeData(request):
             print(device_id, img, quick_spec, pricing, popularity)
             sleep(random.randint(1, 6))
     
+
 def storeToDevices(request):
     """Store the details of each phone in 'Devices' to access in 'find'"""
     
@@ -169,3 +148,30 @@ def storeToDevices(request):
             continue
         
         
+def admin(request):
+    """Render Admin Login Page"""
+    
+    return render(request, "devicedash/admin.html")
+
+
+def add(request):
+    """Add a new device to the database"""
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            return render(request,  "devicedash/add.html", {
+                "msg":"Success",
+            })
+        else:
+            return render(request,  "devicedash/add.html", {
+                "msg":"Fail",
+            })
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')
+
+

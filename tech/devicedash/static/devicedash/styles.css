@@ -110,26 +110,42 @@ nav {
 }
 
 .main-heading {
-    width: 100%;
+    width: 960px;
     padding: 0%;
     margin:0%;    
     padding: 0%
 }
 .main-left {
-    /* float: left; */
     margin-right: 25%;
 }
 .main-right {
     margin:10px;
     margin-left: 30%;
+    text-align: right;
     font-size: 30px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    /* float: right; */
+    width: 500px;
 }
 .description {
+    margin-top: 60px;
     text-align: center;
     font-size: larger;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgba(190, 49, 68, 0.5);
+}
+
+.login-form {
+    margin-left: 25%;
+    margin-top: 70px;
+    width: 50%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form form {
+    margin-top: 15px;
 }
 
 /* .qs {

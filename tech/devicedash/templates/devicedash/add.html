@@ -1,0 +1,21 @@
+{% extends 'devicedash/layout.html' %}
+{% load static %}
+{% block script %}
+    <script src=""></script>
+{% endblock %}
+{% block body %}
+
+<h1 class="display-3">Add Phone {{ msg }}</h1>
+<div class="login-form form-group" id="search">
+    <form action="{% url 'add' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}
