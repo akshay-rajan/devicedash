@@ -62,7 +62,8 @@
    * Find Phone - Done
    * View Phone - Done
    * Home - Done 
-   * Login - Todo
+   * Login - Done
+   * Logout - Todo
    * Add Phone - 
 
 
