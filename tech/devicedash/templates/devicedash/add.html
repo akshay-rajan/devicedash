@@ -5,17 +5,40 @@
 {% endblock %}
 {% block body %}
 
-<h1 class="display-3">Add Phone {{ msg }}</h1>
-<div class="login-form form-group" id="search">
-    <form action="{% url 'add' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input autofocus class="form-control" type="email" name="email" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Login">
-    </form>
-</div>
+{% if user.is_authenticated %}
+    <h1 class="display-3">Add Phone</h1>
+    <div class="login-form form-group" id="search">
+        <form action="{% url 'add' %}" method="post">
+            {% csrf_token %}
+            <table class="add-phone text-center">
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        <div class="form-group">
+                            <input autofocus class="form-control" type="email" name="email" placeholder="Email">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pass</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="password" name="password" placeholder="Password">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input class="btn btn-primary" type="submit" value="Login">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% else %}
+    <h1 class="display-3 text-center">Invalid Credentials!</h1>
+    <div class="text-center login-link">
+        <a href="{% url 'admin' %}"><button class="btn btn-primary" style="width: 300px; margin: 20px">Login</button></a>
+    </div>
+{% endif %}
 {% endblock %}

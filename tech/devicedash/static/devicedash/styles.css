@@ -148,10 +148,12 @@ nav {
     margin-top: 15px;
 }
 
-/* .qs {
-} */
-
-
+.add-phone {
+    width: 100%;
+}
+.add-phone td {
+    vertical-align: middle!important;
+}
 
 
 
