@@ -1,5 +1,6 @@
 from asgiref.sync import sync_to_async
 from .models import Brands, Phones, Specifications
+import re
 
 def saveBrand(brand_id, brand_name):
     brand_data = Brands(brand_id=brand_id, brand=brand_name)
@@ -22,6 +23,8 @@ async_saveSpecs = sync_to_async(saveSpecs)
 
 
 def cleanup(name):
+    """Cleanup the phone's name"""
+    
     seen = set()
     res = []
     for word in name.split():
@@ -29,3 +32,9 @@ def cleanup(name):
             seen.add(word)
             res.append(word)
     return " ".join(res)
+
+
+def clean_brand(brand_name):
+    """Remove the succeeding number from the brand name"""
+
+    return re.sub(r'\d+$', '', brand_name)

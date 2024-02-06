@@ -16,7 +16,7 @@ from asgiref.sync import sync_to_async
 
 from .scrape import getDevice, getDataFromUrl, getDevices, getBrand, getBrands
 from .models import Brands, Phones, Specifications, Devices
-from .utils import async_saveBrand, async_saveDevice, async_saveSpecs, cleanup
+from .utils import async_saveBrand, async_saveDevice, async_saveSpecs, cleanup, clean_brand
 
 
 def index(request):
@@ -170,7 +170,6 @@ def add(request):
             
     brands = Brands.objects.all()
     return render(request,  "devicedash/add.html", {
-        "user": request.user,
         "brands": brands
     })
 
@@ -179,7 +178,37 @@ def add(request):
 def save(request):
     """Add a new device to the database"""
     
+    if request.method == "POST":
+        brand_id = request.POST["brand"]
+        brand = Brands.objects.get(brand_id=brand_id)
+        name = request.POST["name"]
+        device_id = f"{brand_id} {name}"
+        device = Phones(brand=brand, name=name, device_id=device_id)
+        device.save()
+        
+        img = request.POST["img"]
+        quick_spec = [
+            {"name": "Display size", "value": request.POST["screen"]},
+            {"name": "Display resolution", "value": request.POST["resolution"]},
+            {"name": "Camera pixels", "value": request.POST["pixels"]},
+            {"name": "Video pixels", "value": request.POST["video-pixels"]},
+            {"name": "RAM size", "value": request.POST["ram"]},
+            {"name": "Chipset", "value": request.POST["chipset"]},
+            {"name": "Battery size", "value": request.POST["battery"]},
+            {"name": "Battery type", "value": request.POST["battery-type"]}
+        ]
+        price = request.POST["pricing"]
+        popularity = request.POST["popularity"]
+        specs = Specifications(device=device, img=img, quick_spec=quick_spec, pricing=[price], popularity=popularity)
+        specs.save()
+        
+        dev = Devices(brand=brand, device=device, price=price, popularity=popularity)
+        dev.save()        
     
-    pass
+        return render(request, "devicedash/add.html", {
+            "brands": Brands.objects.all(),
+            "msg": "Saved Successfully!"
+        })
+        
 
 

@@ -1,5 +1,6 @@
 body {
     margin: 20px;
+    padding: 2px;
     padding: 7px;
     color: white!important;
     background-color: #22092C!important;
@@ -135,10 +136,19 @@ nav {
 }
 
 .login-form {
-    margin-left: 10%;
+    margin-left: 25%;
     margin-top: 70px;
-    width: 80%;
+    width: 50%;
     padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.add-form {
+    margin-left: 10%;
+    margin-top: 30px;
+    width: 80%;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -163,6 +173,10 @@ nav {
     text-align: center!important;
     margin-left: 33%;
     width: 33%;
+}
+
+.confirmation {
+    background-color: #4158D0;
 }
 
 

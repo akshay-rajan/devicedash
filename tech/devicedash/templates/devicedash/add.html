@@ -7,7 +7,12 @@
 
 {% if user.is_authenticated %}
     <h1 class="display-3">Add Phone</h1>
-    <div class="login-form form-group" id="search">
+    {% if msg %}
+        <div class="confirmation text-center">
+            {{ msg }}
+        </div>
+    {% endif %}
+    <div class="add-form form-group" id="search">
         <form action="{% url 'save' %}" method="post">
             {% csrf_token %}
             <table class="add-phone text-center">
@@ -15,10 +20,10 @@
                     <td>Brand</td>
                     <td>
                         <div class="form-group">
-                            <select autofocus class="form-control" type="text" name="brand" placeholder="">
+                            <select autofocus required class="form-control" type="text" name="brand" placeholder="">
                                 <option value="" selected disabled>SELECT</option>
                                 {% for brand in brands %}
-                                <option value="{{ brand.brand }}">{{ brand.brand }}</option>
+                                <option value="{{ brand.brand_id }}">{{ brand.brand }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -93,6 +98,21 @@
                             <input class="form-control" type="text" name="battery-type" placeholder="eg: Li-ion">
                         </div>
                     </td>
+                    <td>Pricing</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="number" name="pricing" placeholder="₹">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Popularity</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="popularity" placeholder="Out of 100">
+                        </div>
+                    </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td colspan="4">

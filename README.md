@@ -64,7 +64,7 @@
    * Home - Done 
    * Login - Done
    * Logout - Done
-   * Add Phone - todo
+   * Add Phone - Done
 
 
 
