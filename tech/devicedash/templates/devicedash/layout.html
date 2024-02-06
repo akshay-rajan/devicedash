@@ -11,6 +11,19 @@
         {% endblock %}
         {% block script %}
         {% endblock %}
+        <script>
+          document.addEventListener('DOMContentLoaded', (event) => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const currentPath = window.location.pathname;
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.parentNode.classList.add('disabled');
+                    link.classList.add('disabled');
+                }
+            });
+          });
+        </script>
     </head>
     <body>
         <!-- Navbar -->
@@ -24,6 +37,9 @@
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                   <a class="nav-link active" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="{% url 'all' %}">All Phones</a>
                 </li>
                 {% if user.is_authenticated %}
                   <li class="nav-item">

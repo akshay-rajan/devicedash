@@ -65,6 +65,7 @@
    * Login - Done
    * Logout - Done
    * Add Phone - Done
+   * All Phones -  (Pagination)
 
 
 

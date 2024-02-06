@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q, Case, When, Value, IntegerField, F, JSONField
 from django.db.models.functions import Substr
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -61,9 +61,7 @@ def find(request):
                 'price': price,
                 'popularity': popularity
             }])
-            
-        print(data[:1])
-        
+                    
         return render(request, "devicedash/find.html", {
             "data": data 
         })
@@ -97,14 +95,12 @@ async def storeData(request):
 
     for brand_id in brands:
         # await async_saveBrand(brand_id, brand_name)
-        print(brand_id)
         
         devices = await getBrand(brand_id)
         for device in devices:
             device_id = device["id"]
             device_name = device["name"]
             await async_saveDevice(brand_id, device_id, device_name)
-            print(brand_id, device_id, device_name)
             
             smartphone = await getDevice(device_id)
             quick_spec = smartphone["quick_spec"]
@@ -117,7 +113,6 @@ async def storeData(request):
                 await async_saveSpecs(device_id, img, quick_spec, pricing, popularity)
             except:
                 continue
-            print(device_id, img, quick_spec, pricing, popularity)
             sleep(random.randint(1, 6))
     
 
@@ -211,4 +206,25 @@ def save(request):
         })
         
 
-
+def all_phones(request):
+    """Render a page with the list of all phones"""
+    
+    phones = []
+    phones_list = Phones.objects.all()
+    for phone in phones_list:
+        phones.append({
+            "name": cleanup(phone.name),
+            "brand": clean_brand(phone.brand.brand)
+        })
+    
+    paginator = Paginator(phones, 500)
+    page = request.GET.get('page')
+    try:
+        phones = paginator.page(page)
+    except PageNotAnInteger:
+        phones = paginator.page(1)
+    except EmptyPage:
+        phones = paginator.page(paginator.num_pages)
+    return render(request, "devicedash/all.html", {
+        "phones": phones
+    })
