@@ -233,4 +233,11 @@ def all_phones(request):
 def search(request):
     """Search through devices by name or brand."""
     
-    pass
+    if request.method == "GET":
+        phone = request.GET.get("phone")
+        result = Devices.objects.filter(device__name__icontains=phone)
+        
+        return render(request, "devicedash/results.html", {
+            "query": phone,
+            "phones": result
+        })

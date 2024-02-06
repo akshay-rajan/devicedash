@@ -38,8 +38,8 @@
               
               
               <ul class="navbar-nav ml-auto">
-                <form class="form-inline my-2 my-lg-0 ml-auto searchbar" method="" action="">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search Phone" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0 ml-auto searchbar" action="{% url 'search' %}" method="get">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search Phone" aria-label="Search" name="phone">
                   <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 <li class="nav-item">

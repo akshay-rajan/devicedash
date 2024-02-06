@@ -1,0 +1,24 @@
+{% extends 'devicedash/layout.html' %}
+{% load static %}
+{% block script %}
+    <script src=""></script>
+{% endblock %}
+{% block body %}
+<style>
+    h3 {
+        margin: 20px;
+    }
+</style>
+<div class="search-results">
+    {% if phones %}
+        <h1 class="display-4">Results for "{{ query }}"</h1>
+    {% endif %}
+    <ul>
+        {% for phone in phones %}
+            <li>{{ phone }}</li>
+        {% empty %}
+            <h3 class="display-3 text-center">No Phones Found!</h3>
+        {% endfor %}
+    </ul> 
+</div>
+{% endblock %}
