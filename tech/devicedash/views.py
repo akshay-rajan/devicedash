@@ -228,3 +228,9 @@ def all_phones(request):
     return render(request, "devicedash/all.html", {
         "phones": phones
     })
+
+
+def search(request):
+    """Search through devices by name or brand."""
+    
+    pass

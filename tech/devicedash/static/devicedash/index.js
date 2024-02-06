@@ -2,7 +2,7 @@ function setDefaults(option, min, max) {
     document.getElementById('min').value = min;
     document.getElementById('max').value = max;
     
-    document.forms[0].submit();
+    document.forms[1].submit();
 }
 
 function validateForm() {

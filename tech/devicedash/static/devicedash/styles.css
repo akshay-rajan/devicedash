@@ -204,5 +204,18 @@ nav {
     display: inline;
 }
 
+.searchbar {
+    margin-right: 4px!important;
+}
+.searchbar button {
+    background-color: #F05941!important;
+}
+.searchbar input {
+    border: 2px solid #F05941!important;
+}
+.searchbar button:hover {
+    background-color: #bd2424!important;
+    border: 1px solid #F05941!important;
+}
 
 /* light: F05941, BE3144, 872341, 22092C: dark */
