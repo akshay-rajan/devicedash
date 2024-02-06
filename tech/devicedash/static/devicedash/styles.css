@@ -135,9 +135,9 @@ nav {
 }
 
 .login-form {
-    margin-left: 25%;
+    margin-left: 10%;
     margin-top: 70px;
-    width: 50%;
+    width: 80%;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -150,12 +150,20 @@ nav {
 
 .add-phone {
     width: 100%;
+    background-color: #22092C;
 }
-.add-phone td {
+.add-phone tr td {
+    margin: 5px;
+    padding: 5px;
+    text-align: left!important;
     vertical-align: middle!important;
 }
 
-
+.login-button {
+    text-align: center!important;
+    margin-left: 33%;
+    width: 33%;
+}
 
 
 

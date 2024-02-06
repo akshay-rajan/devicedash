@@ -9,6 +9,7 @@ urlpatterns = [
     path("find", views.find, name="find"),
     path("admin", views.admin, name="admin"),
     path("add", views.add, name="add"),
+    path("save", views.save, name="save"),
     path("logout_view", views.logout_view, name="logout"),
     path("find/<str:id>", views.viewPhone, name="viewPhone")
 ]

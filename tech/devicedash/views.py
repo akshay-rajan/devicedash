@@ -154,8 +154,13 @@ def admin(request):
     return render(request, "devicedash/admin.html")
 
 
+def logout_view(request):
+    logout(request)
+    return render(request, "devicedash/logout.html")
+
+
 def add(request):
-    """Add a new device to the database"""
+    """Log the user in, render the Add Phone form"""
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -163,12 +168,18 @@ def add(request):
         if user is not None:
             login(request, user)
             
+    brands = Brands.objects.all()
     return render(request,  "devicedash/add.html", {
-        "user": request.user
+        "user": request.user,
+        "brands": brands
     })
 
-def logout_view(request):
-    logout(request)
-    return render(request, "devicedash/logout.html")
+
+
+def save(request):
+    """Add a new device to the database"""
+    
+    
+    pass
 
 

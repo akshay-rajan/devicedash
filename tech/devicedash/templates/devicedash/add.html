@@ -8,28 +8,95 @@
 {% if user.is_authenticated %}
     <h1 class="display-3">Add Phone</h1>
     <div class="login-form form-group" id="search">
-        <form action="{% url 'add' %}" method="post">
+        <form action="{% url 'save' %}" method="post">
             {% csrf_token %}
             <table class="add-phone text-center">
                 <tr>
-                    <td>Email</td>
+                    <td>Brand</td>
                     <td>
                         <div class="form-group">
-                            <input autofocus class="form-control" type="email" name="email" placeholder="Email">
+                            <select autofocus class="form-control" type="text" name="brand" placeholder="">
+                                <option value="" selected disabled>SELECT</option>
+                                {% for brand in brands %}
+                                <option value="{{ brand.brand }}">{{ brand.brand }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </td>
+                    <td>Device Name</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="name" placeholder="Name">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Pass</td>
+                    <td>Image</td>
                     <td>
                         <div class="form-group">
-                            <input class="form-control" type="password" name="password" placeholder="Password">
+                            <input class="form-control" type="text" name="img" placeholder="url">
+                        </div>
+                    </td>
+                    <td>Display Size</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="screen" placeholder="In Inches">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <input class="btn btn-primary" type="submit" value="Login">
+                    <td>Display Resolution</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="resolution" placeholder="pixels">
+                        </div>
+                    </td>
+                    <td>Camera</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="pixels" placeholder="In MP">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Video</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="video-pixels" placeholder="Pixels">
+                        </div>
+                    </td>
+                    <td>RAM Size</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="ram" placeholder="GB">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Chipset</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="chipset" placeholder="">
+                        </div>
+                    </td>
+                    <td>Battery Size</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="battery" placeholder="mAH">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Battery Type</td>
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="battery-type" placeholder="eg: Li-ion">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <input class="btn btn-primary login-button" type="submit" value="Add Phone to Database">
                     </td>
                 </tr>
             </table>

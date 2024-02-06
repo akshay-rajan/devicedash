@@ -63,8 +63,8 @@
    * View Phone - Done
    * Home - Done 
    * Login - Done
-   * Logout - Todo
-   * Add Phone - 
+   * Logout - Done
+   * Add Phone - todo
 
 
 
