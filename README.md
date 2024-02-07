@@ -21,7 +21,7 @@ Buttons are included in the home page to quickly select a price range rather tha
 * [layout.html](tech/devicedash/templates/devicedash/layout.html): Defines the layout for the application, containing links to all pages and the search bar.
 * [index.html](tech/devicedash/templates/devicedash/index.html): Defines the home page containing a form that lets users select the price range.
 * [find.html](tech/devicedash/templates/devicedash/find.html): Returns the result of the query by the user as cards, displaying only the top 10 phones.
-* [views.html](tech/devicedash/templates/devicedash/views.html): Renders a page containing all details and specifications regarding the phone selected by the user.
+* [view.html](tech/devicedash/templates/devicedash/view.html): Renders a page containing all details and specifications regarding the phone selected by the user.
 * [admin.html](tech/devicedash/templates/devicedash/admin.html): Lets the app administrator login to the website.
 * [add.html](tech/devicedash/templates/devicedash/add.html): Renders a form that lets admin add a new phone to the database.
 * [logout.html](tech/devicedash/templates/devicedash/logout.html): Lets admin log out.
