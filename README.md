@@ -1,4 +1,7 @@
 # DeviceDash
+
+![heyy](device_home.png)
+
  A Smartphone Recommendation Website made with Django.
 
  ## Requirements
