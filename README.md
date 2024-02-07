@@ -1,6 +1,6 @@
 # DeviceDash
 
-![heyy](devicedash_home.png)
+![home](tech\devicedash\static\screenshots\home.png)
 
  A Smartphone Recommendation Website made with Django.
 
