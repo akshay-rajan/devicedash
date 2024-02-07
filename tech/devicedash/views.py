@@ -234,10 +234,16 @@ def search(request):
     """Search through devices by name or brand."""
     
     if request.method == "GET":
-        phone = request.GET.get("phone")
-        result = Devices.objects.filter(device__name__icontains=phone)
+        query = request.GET.get("phone")
+        phones = Devices.objects.filter(Q(device__name__icontains=query) | Q(brand__brand__icontains=query))
+        result = []
+        for phone in phones:
+            result.append({
+                "name": cleanup(phone.device.name),
+                "id": phone.device.device_id,
+            })
         
         return render(request, "devicedash/results.html", {
-            "query": phone,
+            "query": query,
             "phones": result
         })

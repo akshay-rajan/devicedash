@@ -218,4 +218,38 @@ nav {
     border: 1px solid #F05941!important;
 }
 
+.search-cards {
+    margin: auto;
+    text-align: center;
+    align-items: flex-start;
+}
+.search-cards li {
+    display: inline-block;
+    margin: 7px;
+}
+.search-cards li a:hover{
+    text-decoration: none;    
+}
+.search-card-body {
+    display: flex;
+    align-items: center;
+}
+.search-card-body:hover {
+    background-image: linear-gradient(43deg, #7a1f1f 0%, #e0f000 46%, #724e0b 100%)!important;
+}
+.search-card-title {
+    display: inline;
+    color: white;
+    margin: auto;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
 /* light: F05941, BE3144, 872341, 22092C: dark */

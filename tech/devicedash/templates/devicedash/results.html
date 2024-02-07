@@ -13,12 +13,20 @@
     {% if phones %}
         <h1 class="display-4">Results for "{{ query }}"</h1>
     {% endif %}
-    <ul>
-        {% for phone in phones %}
-            <li>{{ phone }}</li>
-        {% empty %}
-            <h3 class="display-3 text-center">No Phones Found!</h3>
-        {% endfor %}
-    </ul> 
+    <div style="display:flex;">
+        <ul class="search-cards">
+            {% for phone in phones %}
+                <li>
+                    <a href="{% url 'viewPhone' phone.id %}">
+                        <div class="card card-card search-card-body" style="width: 250px; height: 100px; overflow: hidden;">
+                            <h5 class="search-card-title">{{ phone.name }}</h5>
+                        </div>
+                    </a>
+                </li>
+            {% empty %}
+                <h3 class="display-3 text-center">No Phones Found!</h3>
+            {% endfor %}
+        </ul> 
+    </div>
 </div>
 {% endblock %}
