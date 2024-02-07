@@ -18,18 +18,18 @@ Buttons are included in the home page to quickly select a price range rather tha
  
  ## Contents
 
-### Templates
-* [layout.html](tech\devicedash\templates\devicedash\layout.html): Defines the layout for the application, containing links to all pages and the search bar.
-* [index.html](tech\devicedash\templates\devicedash\index.html): Defines the home page containing a form that lets users select the price range.
-* [find.html](tech\devicedash\templates\devicedash\find.html): Returns the result of the query by the user as cards, displaying only the top 10 phones.
-* [views.html](tech\devicedash\templates\devicedash\views.html): Renders a page containing all details and specifications regarding the phone selected by the user.
-* [admin.html](tech\devicedash\templates\devicedash\admin.html): Lets the app administrator login to the website.
-* [add.html](tech\devicedash\templates\devicedash\add.html): Renders a form that lets admin add a new phone to the database.
-* [logout.html](tech\devicedash\templates\devicedash\logout.html): Lets admin log out.
-* [results.html](tech\devicedash\templates\devicedash\results.html): Renders a page displaying the results of search query
-* [all.html](tech\devicedash\templates\devicedash\all.html): Displays a page with a list of all phones in the database.
+* [layout.html](tech/devicedash/templates/devicedash/layout.html): Defines the layout for the application, containing links to all pages and the search bar.
+* [index.html](tech/devicedash/templates/devicedash/index.html): Defines the home page containing a form that lets users select the price range.
+* [find.html](tech/devicedash/templates/devicedash/find.html): Returns the result of the query by the user as cards, displaying only the top 10 phones.
+* [views.html](tech/devicedash/templates/devicedash/views.html): Renders a page containing all details and specifications regarding the phone selected by the user.
+* [admin.html](tech/devicedash/templates/devicedash/admin.html): Lets the app administrator login to the website.
+* [add.html](tech/devicedash/templates/devicedash/add.html): Renders a form that lets admin add a new phone to the database.
+* [logout.html](tech/devicedash/templates/devicedash/logout.html): Lets admin log out.
+* [results.html](tech/devicedash/templates/devicedash/results.html): Renders a page displaying the results of search query
+* [all.html](tech/devicedash/templates/devicedash/all.html): Displays a page with a list of all phones in the database.
 
-### [views.py](tech\devicedash\views.py)
+
+### [views.py](tech/devicedash/views.py)
 
 This file contains all the django views for the project. The file starts with `index` function which renders the home page. The `find` function receives the user input of price range and returns the top 10 phones falling inside the price range, ordered by descending order of their popularity. When clicked on a card containing details of a phone rendered by this function, the `viewPhone` function takes the user to a page which displays all the details regarding that phone.
 
@@ -38,10 +38,10 @@ This file contains all the django views for the project. The file starts with `i
 The function `admin` returns a page for administrator login, meanwhile `logout_view` facilitates logout. `add` validates admin login, while rendering the page for adding a new phone to the database. `save` function saves the new phone to the database. `all_phones` returns a **Paginated** list of all phones in the database. `search` takes the smartphone name or brand name entered by the user in the search bar and renders a page containing all the search results.
 
 
-### [models.py](tech\devicedash\models.py)
-### [urls.py](tech\devicedash\urls.py)
-### [utils.py](tech\devicedash\utils.py)
-### [scrape.py](tech\devicedash\scrape.py)
+### [models.py](tech/devicedash/models.py)
+### [urls.py](tech/devicedash/urls.py)
+### [utils.py](tech/devicedash/utils.py)
+### [scrape.py](tech/devicedash/scrape.py)
 
 ## How to Run
 
