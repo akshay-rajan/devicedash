@@ -29,7 +29,7 @@ Buttons are included in the home page to quickly select a price range rather tha
 * [results.html](tech\devicedash\templates\devicedash\results.html): Renders a page displaying the results of search query
 * [all.html](tech\devicedash\templates\devicedash\all.html): Displays a page with a list of all phones in the database.
 
-### views.py
+### [views.py](tech\devicedash\views.py)
 
 This file contains all the django views for the project. The file starts with `index` function which renders the home page. The `find` function receives the user input of price range and returns the top 10 phones falling inside the price range, ordered by descending order of their popularity. When clicked on a card containing details of a phone rendered by this function, the `viewPhone` function takes the user to a page which displays all the details regarding that phone.
 
@@ -38,10 +38,10 @@ This file contains all the django views for the project. The file starts with `i
 The function `admin` returns a page for administrator login, meanwhile `logout_view` facilitates logout. `add` validates admin login, while rendering the page for adding a new phone to the database. `save` function saves the new phone to the database. `all_phones` returns a **Paginated** list of all phones in the database. `search` takes the smartphone name or brand name entered by the user in the search bar and renders a page containing all the search results.
 
 
-### models.py
-### urls.py
-### utils.py
-### scrape.py
+### [models.py](tech\devicedash\models.py)
+### [urls.py](tech\devicedash\urls.py)
+### [utils.py](tech\devicedash\utils.py)
+### [scrape.py](tech\devicedash\scrape.py)
 
 ## How to Run
 
