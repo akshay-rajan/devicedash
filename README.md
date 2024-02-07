@@ -16,48 +16,43 @@ The application provides an "All Phones" button in the navigation bar, which let
 
 Buttons are included in the home page to quickly select a price range rather than entering the starting and ending prices, which categorizes the price range into Budget, Mid Range and Flagship phones. The data scraped to be used has undergone various cleanups before they were of suitable format. The project is sufficiently distinct from an e-commerce website or a social media website and uses almost all of the skills covered in the course. It uses Django on the backend, with multiple models and JavaScript on the front end, including stylish designing using CSS. 
  
- ## Design
+ ## Contents
 
-   * Create Models - Done
-   * Fetching - Done
-   * Storing Brands - Done
-   * Storing Phones - Done
-   * Storing Specs - Done
-   * Fetching Database === Fail
-      New Table to create
-   * Create "Devices" - Done
+### Templates
+* [layout.html](tech\devicedash\templates\devicedash\layout.html): Defines the layout for the application, containing links to all pages and the search bar.
+* [index.html](tech\devicedash\templates\devicedash\index.html): Defines the home page containing a form that lets users select the price range.
+* [find.html](tech\devicedash\templates\devicedash\find.html): Returns the result of the query by the user as cards, displaying only the top 10 phones.
+* [views.html](tech\devicedash\templates\devicedash\views.html): Renders a page containing all details and specifications regarding the phone selected by the user.
+* [admin.html](tech\devicedash\templates\devicedash\admin.html): Lets the app administrator login to the website.
+* [add.html](tech\devicedash\templates\devicedash\add.html): Renders a form that lets admin add a new phone to the database.
+* [logout.html](tech\devicedash\templates\devicedash\logout.html): Lets admin log out.
+* [results.html](tech\devicedash\templates\devicedash\results.html): Renders a page displaying the results of search query
+* [all.html](tech\devicedash\templates\devicedash\all.html): Displays a page with a list of all phones in the database.
 
-      |column|datatype|
-      |------|--------|
-      |brand|f-key|
-      |device|f-key|
-      |price|int|
-      |popularity|float|
-   * Storing in Devices - Done (currency conversion)
-   * Find Phone - Done
-   * View Phone - Done
-   * Home - Done 
-   * Login - Done
-   * Logout - Done
-   * Add Phone - Done
-   * All Phones - Done (Pagination)
-   * Search - Done
-   * Design - Done
+### views.py
+
+This file contains all the django views for the project. The file starts with `index` function which renders the home page. The `find` function receives the user input of price range and returns the top 10 phones falling inside the price range, ordered by descending order of their popularity. When clicked on a card containing details of a phone rendered by this function, the `viewPhone` function takes the user to a page which displays all the details regarding that phone.
+
+`storeData` is an **asynchronous** function which fetches data from the scraped website using functions from the **scrape.py** file, and stores them to the database. `storeToDevices` is a similar function which connects the data in different models by unifying them under a model named _Devices_.
+
+The function `admin` returns a page for administrator login, meanwhile `logout_view` facilitates logout. `add` validates admin login, while rendering the page for adding a new phone to the database. `save` function saves the new phone to the database. `all_phones` returns a **Paginated** list of all phones in the database. `search` takes the smartphone name or brand name entered by the user in the search bar and renders a page containing all the search results.
 
 
-
-   
- 3. Display phones according to user input
-
- ## Implementation
-
-
-
+### models.py
+### urls.py
+### utils.py
 ### scrape.py
-* getDataFromUrl(url) - returns the source of a page
-* getBrands() - returns a list of all brands
-* getBrand(brand_id) - returns a list of all phones of a particular brand
-* getNextPage(beautifulsoup_object) - returns the next page, if there is one
-* getDevice(device_id) - returns all details regarding a device
 
-* getDevices(soup, devices_list) - returns a refined list of devices, to use in the website
+## How to Run
+
+1. Move to the repository containing the application
+2. Install the dependencies by running
+
+         pip install bs4
+
+2. Start the server by
+      
+         py manage.py runserver
+
+3. Open the website by clicking on the url in the terminal.
+
