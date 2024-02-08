@@ -21,11 +21,14 @@ Buttons are included in the home page to quickly select a price range rather tha
 * [layout.html](tech/devicedash/templates/devicedash/layout.html): Defines the layout for the application, containing links to all pages and the search bar.
 * [index.html](tech/devicedash/templates/devicedash/index.html): Defines the home page containing a form that lets users select the price range.
 * [find.html](tech/devicedash/templates/devicedash/find.html): Returns the result of the query by the user as cards, displaying only the top 10 phones.
+![find](tech/devicedash/static/screenshots/find.png)
 * [view.html](tech/devicedash/templates/devicedash/view.html): Renders a page containing all details and specifications regarding the phone selected by the user.
+![view](tech/devicedash/static/screenshots/view.png)
 * [admin.html](tech/devicedash/templates/devicedash/admin.html): Lets the app administrator login to the website.
 * [add.html](tech/devicedash/templates/devicedash/add.html): Renders a form that lets admin add a new phone to the database.
 * [logout.html](tech/devicedash/templates/devicedash/logout.html): Lets admin log out.
 * [results.html](tech/devicedash/templates/devicedash/results.html): Renders a page displaying the results of search query
+![search](tech/devicedash/static/screenshots/search_results.png)
 * [all.html](tech/devicedash/templates/devicedash/all.html): Displays a page with a list of all phones in the database.
 
 
@@ -39,9 +42,36 @@ The function `admin` returns a page for administrator login, meanwhile `logout_v
 
 
 ### [models.py](tech/devicedash/models.py)
-### [urls.py](tech/devicedash/urls.py)
+
+Django Models Defined here and the fields in them are
+* `Brands`: *brand_id*, *brand*(brand name)
+* `Phones`: *brand*(Foreign key), *device_id*, *name*
+* `Specifications`: *device*(Foreign Key), *img*(Image Url), *quick_spec*(A list of specifications), *pricing*(A list of prices), *popularity*(In Percentage)
+* `Devices`: *brand*(Foreign Key), *device*(One to One Field), *price*, *popularity*.
+
+All these models contain a string representation of themselves, for easy identification in the _Django Admin_ page.
+
+
+### [devicedash/urls.py](tech/devicedash/urls.py)
+
+Defines all the url patterns used in this django application.
+
 ### [utils.py](tech/devicedash/utils.py)
+
+Contains all the utility functions used in the website. It starts with `saveBrand`, `saveDevice` and `saveSpecs` which are functions used to store the scraped data to the database. These functions are modified to `async_saveBrand`, `async_saveDevice` and `async_saveSpecs` by wrapping them with **sync_to_async()** from the *asgrief.sync* module, to use them asynchronously, since django models only enables synchronous use by default. 
+
+Other functions include `cleanup(name)` which cleans up the device names that are fetched, and `clean_brand(brand_name)` which does the same for brands.
+
 ### [scrape.py](tech/devicedash/scrape.py)
+
+This file defines all the functions used for web scraping using **BeautifulSoup**, from *gsmarena.com*. The functions  include:
+
+1. `getDataFromUrl`: Returns the entire source html of a url as text.
+2. `getNextPage`: Returns the next page of a url, if available
+3. `getBrands`: Returns a list of all brands in the website as JSON objects.
+4. `getDevices`: Returns a cleaned list of devices from a newly fetched list of devices
+5. `getBrand`: Fetches a list of all devices from a particular brand
+6. `getDevice`: Returns all the details regarding a particular device from the web page
 
 ## How to Run
 
